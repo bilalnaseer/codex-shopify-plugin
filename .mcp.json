@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "shopify": {
+      "command": "python3",
+      "args": [
+        "./scripts/shopify_mcp_server.py"
+      ],
+      "env": {
+        "SHOPIFY_STORE_DOMAIN": "${SHOPIFY_STORE_DOMAIN}",
+        "SHOPIFY_CLIENT_ID": "${SHOPIFY_CLIENT_ID}",
+        "SHOPIFY_CLIENT_SECRET": "${SHOPIFY_CLIENT_SECRET}",
+        "SHOPIFY_ADMIN_ACCESS_TOKEN": "${SHOPIFY_ADMIN_ACCESS_TOKEN:-}",
+        "SHOPIFY_API_VERSION": "${SHOPIFY_API_VERSION:-2025-10}"
+      }
+    }
+  }
+}

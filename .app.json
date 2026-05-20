@@ -1,0 +1,12 @@
+{
+  "apps": {
+    "shopify": {
+      "displayName": "Shopify",
+      "description": "Read-only Shopify Admin API data connector for Codex.",
+      "auth": {
+        "type": "oauth_client_credentials",
+        "instructions": "Create a Shopify Dev Dashboard app, configure scopes, install it on your store, then set SHOPIFY_STORE_DOMAIN, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in your Codex environment."
+      }
+    }
+  }
+}

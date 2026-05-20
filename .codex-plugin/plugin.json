@@ -1,0 +1,48 @@
+{
+  "name": "shopify",
+  "version": "0.1.0",
+  "description": "Connect Codex to a Shopify Admin API store for read-only store analytics and data chat.",
+  "author": {
+    "name": "Local Shopify Plugin",
+    "email": "you@example.com",
+    "url": "https://shopify.dev/docs/api/admin-rest"
+  },
+  "homepage": "https://shopify.dev/docs/api/admin-rest",
+  "repository": "https://shopify.dev/docs/api/admin-rest",
+  "license": "MIT",
+  "keywords": [
+    "shopify",
+    "commerce",
+    "orders",
+    "products",
+    "analytics"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks.json",
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Shopify",
+    "shortDescription": "Chat with your Shopify store data.",
+    "longDescription": "Connect a Shopify Admin API access token so Codex can answer read-only questions about products, orders, customers, and shop metadata from your store.",
+    "developerName": "Local Shopify Plugin",
+    "category": "Commerce",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Commerce analytics"
+    ],
+    "websiteURL": "https://shopify.dev/docs/api/admin-rest",
+    "privacyPolicyURL": "https://www.shopify.com/legal/privacy",
+    "termsOfServiceURL": "https://www.shopify.com/legal/terms",
+    "defaultPrompt": [
+      "Summarize recent Shopify orders.",
+      "Which products are low on inventory?",
+      "Show my store profile."
+    ],
+    "brandColor": "#95BF47",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "screenshots": []
+  }
+}
