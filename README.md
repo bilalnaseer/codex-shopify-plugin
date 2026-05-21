@@ -14,7 +14,15 @@ cd ~/plugins/shopify
 ./install.sh
 ```
 
-Set environment variables for Codex desktop:
+Create a private local credential file:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` with your Shopify store and app credentials. The file is ignored by git and should not be committed.
+
+Alternatively, set environment variables for Codex desktop:
 
 ```bash
 launchctl setenv SHOPIFY_STORE_DOMAIN "your-store.myshopify.com"
@@ -82,6 +90,15 @@ Set user environment variables for Codex desktop:
 
 Fully quit and reopen Codex, open Plugins, and enable **Shopify** from **Local Plugins**.
 
+As an alternative on Windows, create a private local credential file:
+
+```powershell
+Copy-Item .env.example .env.local
+notepad .env.local
+```
+
+The `.env.local` file is ignored by git and should not be committed.
+
 ## Shopify Setup
 
 1. Create an app in the Shopify Dev Dashboard.
@@ -92,6 +109,11 @@ Fully quit and reopen Codex, open Plugins, and enable **Shopify** from **Local P
 ## Codex Environment Notes
 
 The MCP server exchanges the Client ID and Client Secret for a Shopify access token using the client credentials grant. If you have a legacy admin-created custom app with a long-lived token, you can still set `SHOPIFY_ADMIN_ACCESS_TOKEN` instead.
+
+Configuration is read in this order:
+
+1. Environment variables
+2. `.env.local` in the plugin directory
 
 For macOS terminal-only testing, regular shell exports also work:
 

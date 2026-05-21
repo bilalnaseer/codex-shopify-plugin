@@ -8,17 +8,42 @@ import os
 import sys
 import time
 import traceback
+from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 
 
-API_VERSION = os.getenv("SHOPIFY_API_VERSION", "2025-10")
-RAW_STORE_DOMAIN = os.getenv("SHOPIFY_STORE_DOMAIN", "")
-ACCESS_TOKEN = os.getenv("SHOPIFY_ADMIN_ACCESS_TOKEN", "")
-CLIENT_ID = os.getenv("SHOPIFY_CLIENT_ID", "")
-CLIENT_SECRET = os.getenv("SHOPIFY_CLIENT_SECRET", "")
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+LOCAL_ENV_FILE = PLUGIN_ROOT / ".env.local"
+
+
+def load_local_env() -> dict[str, str]:
+    values: dict[str, str] = {}
+    if not LOCAL_ENV_FILE.exists():
+        return values
+    for line in LOCAL_ENV_FILE.read_text().splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, value = stripped.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
+
+
+LOCAL_ENV = load_local_env()
+
+
+def config_value(name: str, default: str = "") -> str:
+    return os.getenv(name) or LOCAL_ENV.get(name, default)
+
+
+API_VERSION = config_value("SHOPIFY_API_VERSION", "2025-10")
+RAW_STORE_DOMAIN = config_value("SHOPIFY_STORE_DOMAIN")
+ACCESS_TOKEN = config_value("SHOPIFY_ADMIN_ACCESS_TOKEN")
+CLIENT_ID = config_value("SHOPIFY_CLIENT_ID")
+CLIENT_SECRET = config_value("SHOPIFY_CLIENT_SECRET")
 TOKEN_CACHE: dict[str, Any] = {"access_token": ACCESS_TOKEN, "expires_at": 0}
 
 
